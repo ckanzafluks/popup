@@ -1,0 +1,30 @@
+.hide {
+	display: none;
+}
+#content-diet {
+	background-color: red;
+}
+#content-diet button {
+	padding:5px;
+}
+
+.lineForm {
+	background-color: #A3BFD3;
+}
+.table {
+	width: 100%;
+}
+#table-product tr {
+	height: 35px;
+}
+#table-product .odd {
+	background-color: #F4F8FB;	
+}
+
+.records {
+	background-color: red;
+}
+.fix-table {
+
+}
+

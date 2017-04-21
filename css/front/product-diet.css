@@ -1,0 +1,214 @@
+/*** Message d'erreur en entete ****/
+.error {
+	color:red;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bolder;
+}
+
+.modal-body {
+    max-height: inherit;
+}
+
+/***** bouton radio homme/femme *****/
+
+.btn-primary,
+.btn-primary:hover, 
+.btn-primary:focus, 
+.btn-primary:active, 
+.btn-primary.active, 
+.btn-primary.disabled, 
+.btn-primary[disabled] {
+	background-color: inherit;
+	background-color: #30cc00;
+}
+
+
+
+
+button.btnIMC {
+	border: none;
+	text-transform: uppercase;
+	background: #629f01;
+}
+
+
+.bloc-left {	
+	width: 40%;
+	float: left;
+	overflow:hidden;	
+}
+.bloc-left .overlay{
+	 position: absolute;
+	 top: 0;
+	 left: 0;
+	 width: 100%;
+	 height: 100%;
+	 z-index: 10;
+	 background-color: rgba(228, 226, 226, 0.95);
+	opacity: 93.4;
+	filter: alpha(opacity=40); /* For IE8 and earlier */  
+}
+
+.bloc-left #error-box {
+	display: none;
+	margin-top:3px;
+	padding-top: 3px;
+	color:red;
+	font-weight: bold;
+	background-color: rgb(246, 252, 235);
+	
+	-moz-border-radius-topleft: 1px;
+	-webkit-border-top-left-radius: 1px;
+	border-top-left-radius: 1px;
+	-moz-border-radius-topright: 20px;
+	-webkit-border-top-right-radius: 20px;
+	border-top-right-radius: 20px;
+	-moz-border-radius-bottomleft: 20px;
+	-webkit-border-bottom-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+		
+}
+
+.bloc-left #error-box p {
+	font-size: 16px;
+}
+
+
+.bloc-left input {
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border: 1px solid #D2BC60;
+	/*
+	-webkit-border-top-left-radius: 1px;
+	border-top-left-radius: 1px;
+	-moz-border-radius-topright: 20px;
+	-webkit-border-top-right-radius: 20px;
+	border-top-right-radius: 20px;
+	-moz-border-radius-bottomleft: 20px;
+	-webkit-border-bottom-left-radius: 20px;
+	border-bottom-left-radius: 20px;*/
+}
+.bloc-left input:focus { 
+    background-color:#DCF2BA;
+}
+.bloc-left .line {
+	float:left;
+	clear:both;
+}
+.bloc-left .linex .image-doctor {
+	width:100%;
+	clear:both;
+}	
+.bloc-left .linex .image-food {
+	float:left;
+	width:100px;
+}
+.bloc-left .linex .plus {
+	float:left;
+	width:10px;
+	font-weight: bolder;
+	padding-top: 20px;
+	font-size: 20px;
+}
+.bloc-left #legend-chart {
+	position: absolute;
+	top: 268px;	
+}
+.bloc-left #legend-chart > table {
+	background-color: white;
+}
+.how {
+	font-weight: bolder;
+	font-size: 160px;
+	text-align: center;
+	width: 100%;
+	padding-left: 39px;	
+}	
+.bloc-left .linex img {
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;		
+}	
+#contentBody > div.bloc-left.first > div.circle {
+	width: 20px;
+    height: 20px;
+    float:left;    
+    font-weight:bolder;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    background-color:#629F01;
+    color:white;
+}
+.bloc-left .rectangle {
+	width: 30px;
+	height: 20px;
+	float: left;
+	font-weight: bolder;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	margin-right:5px;
+	padding: 2px;
+	color:white;
+}
+.bloc-left .text {
+	color: black;
+	font-weight: bolder;
+	width: 164px;
+}
+.bloc-left .line .text-podologie {
+	text-align: justify;	
+}
+.bloc-left .line .text-podologie #estimation {
+	font-weight: bolder;
+	color:red;
+}
+.bloc-left span {
+	text-transform: uppercase;	
+}
+.bloc-left span.title {
+	color:#629f01;
+	font-weight:bolder;
+	text-transform: uppercase;
+	/*text-align: left;*/
+	/*float: left;*/
+	/*padding-left: 5px;*/	
+}
+.bloc-left #text-link-prod .linkProducts {
+	width: 100%;
+	clear: both;	
+	text-align: left;
+	padding-top: 10px;
+}
+.bloc-left #text-link-prod .linkProducts p {
+	line-height: 10px;	
+}
+.bloc-left #text-link-prod .linkProducts .lineLinks {
+	float: left;
+	width: 100%;
+	padding-bottom: 10px;
+	clear: both;
+}
+.bloc-left #text-link-prod .linkProducts .hover:hover {
+	background-color: rgb(249, 249, 249);
+	/*border: 1px dotted black;
+	padding:2px;*/
+}
+.bloc-left #text-link-prod .linkProducts a {
+			
+}
+.bloc-left #text-link-prod .linkProducts .lineLinks img {
+	float:left;
+}
+.bloc-left #text-link-prod .linkProducts .lineLinks span {
+	float:left;
+	padding-top: 2px;
+}
+#text-link-prod > img {
+	padding-bottom: 7px;
+}

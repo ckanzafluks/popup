@@ -1,0 +1,16 @@
+<div id="dynamic-breadcrumbs" style="display:none;">
+	<a class="home" href="{$link->getPageLink(null, true)|escape:'html':'UTF-8'}" title="{l s='Back to homepage'}"><span class="glyphicon glyphicon-home"></span></a>
+	<a href="{$link->getPageLink('my-account', true)|escape:'html':'UTF-8'}">{l s='My account' mod='register' mod='register'}</a>
+	<span class="navigation-pipe">&gt;</span>
+	<span class="navigation_page">{l s='Manage my warranties' mod='register'}</span>
+</div>
+
+
+<p class="clearfix main-page-indent">
+	<a href="{$link->getPageLink(null, true)|escape:'html':'UTF-8'}module/register/add" title="{l s='Add a new product' mod='register'}" class="btn btn-primary button button-medium">
+		{l s='Add a new product' mod='register'} <span class="glyphicon glyphicon-chevron-right"></span>
+	</a>
+</p>
+<p class="alert alert-warning">
+	{l s='No data set' mod='register'}.
+</p>
