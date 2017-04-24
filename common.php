@@ -10,9 +10,6 @@ Abstract class Common extends Module {
 	
 	public $url;
 	
-	protected $ext = array('jpg', 'jpeg', 'png', 'gif', 'bmp'); //Images
-  
-	
 	
 	########################### INSTALLATION METHODS #######################################################
 	/**
@@ -50,19 +47,19 @@ Abstract class Common extends Module {
 				) ENGINE=InnoDB;';
 		
 		$sql .= '
-		CREATE TABLE IF NOT EXISTS  `'._DB_PREFIX_. 'popup_condition` (
-		  `id_popup_condition` int(11) NOT NULL AUTO_INCREMENT,
+		CREATE TABLE IF NOT EXISTS  `'._DB_PREFIX_. 'popup_conditions` (
+		  `id_popup_conditions` int(11) NOT NULL AUTO_INCREMENT,
 		  `id_popup` int(11) NOT NULL,
-		  `id_category` tinyint(1) NOT NULL,
-		  `id_category_condition` tinyint(1) NOT NULL,
-		  `url` int(11) NULL,
+		  `id_category` int(11) NULL,
+		  `id_category_condition` INT(11) NULL,
+		  `url` varchar(255) NULL,
 		  `url_condition` varchar(255) NULL,
 		  `id_produit` INT(11) NULL,
 		  `id_produit_condition` INT(11) NULL,
 		  `abondoned_cart` tinyint(1) NULL,
 		  `abondoned_cart_condition` varchar(255) NULL,
 		  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-		  PRIMARY KEY (`id_popup_condition`)
+		  PRIMARY KEY (`id_popup_conditions`)
 		) ENGINE=InnoDB;';
 				
 		return Db::getInstance()->Execute($sql);
@@ -98,8 +95,8 @@ Abstract class Common extends Module {
 	##################################### HEADERS INIT ##########################################################
 	protected  function _initHeaderHTML()
 	{
-		$this->context->controller->addJS($this->_path .'js/pop.js');
-		$this->context->controller->addCSS($this->_path .'css/pop.css');	
+		$this->context->controller->addJS($this->_path .'js/bo/popup.js');
+		$this->context->controller->addCSS($this->_path .'css/bo/popup.css');	
 	}
 	##################################### END HEADERS INIT #######################################################
 		

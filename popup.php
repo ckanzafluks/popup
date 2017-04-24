@@ -3,11 +3,9 @@
 if (!defined('_PS_VERSION_'))
   exit;
 
-//$_SESSION["verify"] = "RESPONSIVEfilemanager";
-//include(PS_ADMIN_DIR. '/filemanager/include/utils.php');
-include_once(_PS_MODULE_DIR_ . 'dietconfiguration/common.php');
+include_once('common.php');
 
-class Dietconfiguration extends Common {
+class Popup extends Common {
 	
 	
 	/**
@@ -16,17 +14,17 @@ class Dietconfiguration extends Common {
 	public function __construct(){
 		
 
-		$this->name 		 		  = 'dietconfiguration';
-		$this->tab     		 		  = 'dietconfiguration';
-		$this->version 		 		  = 2.0;
+		$this->name 		 		  = 'popup';
+		$this->tab     		 		  = 'popup';
+		$this->version 		 		  = 1.0;
 		$this->author 		 		  = 'KANZAFOX 5.0';
 		$this->need_instance 		  = 0;
 		$this->url 			 		  = $_SERVER["REQUEST_URI"];
 		$this->ps_versions_compliancy = array('min' => '1.5', 'max' => '1.6');
 	 
 		parent::__construct();
-	 	$this->displayName 	= $this->l("Diet configuration");
-		$this->description 	= $this->l("Module de configuration du calcul d'IMC. Powered by CKA");		
+	 	$this->displayName 	= $this->l("Module Popup");
+		$this->description 	= $this->l("Module Popup. Powered by CKA");		
 		$this->context 		= Context::getContext();
 		$this->id_lang 		= $this->context->cookie->id_lang;
 
@@ -39,9 +37,7 @@ class Dietconfiguration extends Common {
 		$this->context->controller->addJS($this->_path  . 'libs/thickbox/thickbox-compressed.js');
 		$this->context->controller->addCSS($this->_path . 'libs/thickbox/thickbox.css');
 		$this->context->controller->addJS($this->_path  . 'js/front/highcharts/highcharts.js');
-		$this->context->controller->addJS($this->_path  . 'js/front/highcharts/highcharts-more.js');
-
-		
+		$this->context->controller->addJS($this->_path  . 'js/front/highcharts/highcharts-more.js');		
 
 		$product = $params['product'];
 
@@ -55,7 +51,7 @@ class Dietconfiguration extends Common {
 				'link'        => $this->context->link
 			)
 		);
-		return $this->display(__FILE__, 'views/front/product-diet.tpl');
+		return $this->display(__FILE__, 'views/front/popup.tpl');
 	}
 
 
