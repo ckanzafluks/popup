@@ -1,6 +1,6 @@
 <?php
 
-Abstract class Common extends Module {
+Abstract class Commonpopup extends Module {
 
 	protected $_html = '';
 	
@@ -20,8 +20,8 @@ Abstract class Common extends Module {
 	
 		if (
 			!parent::install() ||
-			!$this->_installTables() ||
-			!$this->registerHook('displayProductButtons')
+			!$this->_installTables() 
+			//!$this->registerHook('displayProductButtons')
 		) {
 			return false;
 		}
@@ -51,11 +51,11 @@ Abstract class Common extends Module {
 		  `id_popup_conditions` int(11) NOT NULL AUTO_INCREMENT,
 		  `id_popup` int(11) NOT NULL,
 		  `id_category` int(11) NULL,
-		  `id_category_condition` INT(11) NULL,
+		  `category_condition` VARCHAR(255) NULL,
 		  `url` varchar(255) NULL,
-		  `url_condition` varchar(255) NULL,
+		  `url_condition` VARCHAR(255) NULL,
 		  `id_produit` INT(11) NULL,
-		  `id_produit_condition` INT(11) NULL,
+		  `produit_condition` VARCHAR(255),
 		  `abondoned_cart` tinyint(1) NULL,
 		  `abondoned_cart_condition` varchar(255) NULL,
 		  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

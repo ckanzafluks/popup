@@ -3,9 +3,9 @@
 if (!defined('_PS_VERSION_'))
   exit;
 
-include_once('common.php');
+require_once('commonpopup.php');
 
-class Popup extends Common {
+class Popup extends Commonpopup {
 	
 	
 	/**
@@ -55,40 +55,45 @@ class Popup extends Common {
 	}
 
 
-	
-	private function _isValidExtension($path) {
-		
-	}
-	
-	
-	private function _moveFile(){
-				
-		$target = NULL ; //var_dump($target);
-		if (!empty($_FILES))
-		{
-			$info = pathinfo($_FILES['image']['name']);			
-			if (isset($info['extension']) && in_array($this->_fixStrtolower($info['extension']), $this->ext))
-			{	
-				$pathUpload = _PS_THEME_DIR_ . DIRECTORY_SEPARATOR . 'img' .  DIRECTORY_SEPARATOR . 'diet' . DIRECTORY_SEPARATOR . Tools::getValue('id_category') . DIRECTORY_SEPARATOR;
-				if ( !is_dir($pathUpload) ) mkdir($pathUpload,0705,true);
-				$fileName 	= md5(time()). '.' . $info["extension"];
 
-				if ( move_uploaded_file($_FILES['image']['tmp_name'], $pathUpload . $fileName ) ) {
-					$target = $fileName; 
-				}
-			}
-		}
-		return $target;		
+	private function _initHookList()
+	{
+		$hookList = Hook::getHooks();
+		$html     = '<table class="table">
+						<thead>
+							<tr>
+								<th> </th>
+								<th>idHook</th>
+								<th>name</th>
+								<th>title</th>
+								<th>description</th>
+							</tr>
+						</thead>
+					 	<tbody>';
+
+						foreach ( $hookList as $key => $row ) {
+							$html .= '<tr>';
+								$html .= '<td>';
+									$html .= $key++;
+								$html .= '</td>';
+								$html .= '<td>';
+									$html .= $row['id_hook'];
+								$html .= '</td>';
+								$html .= '<td>';
+									$html .= $this->l($row['name']);
+								$html .= '</td>';
+								$html .= '<td>';
+									$html .= $this->l($row['title']);
+								$html .= '</td>';
+								$html .= '<td>';
+									$html .= $this->l($row['description']);
+								$html .= '</td>';
+							$html .= '</tr>';
+						}
+		$html     .= '</table>';
+		return $html;
 	}
-	
-	private function _fixStrtolower($str){
-	    if( function_exists( 'mb_strtoupper' ) )
-			return mb_strtolower($str);
-	    else
-			return strtolower($str);
-	}
-	
-	
+
 	/**
 	 * 
 	 * @return string
@@ -98,10 +103,12 @@ class Popup extends Common {
 
 
 
-
 		// we add headers
 		$this->_html = '';
 		$this->_initHeaderHTML();
+
+		// tableau des hooks
+		$this->_html .= $this->_initHookList();
 		
 				
 		if ( Tools::isSubmit('submit') ) {
