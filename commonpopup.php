@@ -20,8 +20,8 @@ Abstract class Commonpopup extends Module {
 	
 		if (
 			!parent::install() ||
-			!$this->_installTables() 
-			//!$this->registerHook('displayProductButtons')
+			!$this->_installTables() ||
+			!$this->registerHook('displayFooter')
 		) {
 			return false;
 		}
@@ -85,8 +85,8 @@ Abstract class Commonpopup extends Module {
 	 * @return boolean
 	 */
 	private function _uninstallTables() {
-		$sql1 = 'DROP TABLE  `'._DB_PREFIX_. 'popup`;';
-		$sql2 = 'DROP TABLE `'._DB_PREFIX_. 'popup_condition`;';
+		$sql1 = 'DROP TABLE IF EXISTS `'._DB_PREFIX_. 'popup`;';
+		$sql2 = 'DROP TABLE IF EXISTS `'._DB_PREFIX_. 'popup_condition`;';
 		return Db::getInstance()->Execute($sql1) && Db::getInstance()->Execute($sql2);
 	}
 	########################### END UNINSTALLATION METHODS ###################################################
@@ -269,26 +269,6 @@ Abstract class Commonpopup extends Module {
 		return $helper->generateForm(array($fields_form_1));
 	}
 	
-	
-	private function _loadParamsForResultImcAlter($idCategory = false) {
-		$sql = 'SELECT * FROM  `'._DB_PREFIX_. 'diet_category_result_imc_alter` ';
-		if ( !empty($idCategory) ) {
-			$sql .= 'WHERE id_category='.(int) $idCategory;
-		}
-		$result = Db::getInstance()->executeS($sql);
-		if ( $result ) {
-			return array(
-				'min' 	=> $result[0]["min"], 
-				'max' 	=> $result[0]["max"],
-				'image' => $result[0]["image"],
-			);
-		} else {
-			return array(
-				'min' => 1,
-				'max' => 1,
-			);
-		}			
-	}
 	
 	/**
 	 * 

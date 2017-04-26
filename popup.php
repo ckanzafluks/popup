@@ -30,22 +30,21 @@ class Popup extends Commonpopup {
 
 	}
 
-	function hookDisplayProductButtons($params) {
+	function hookDisplayFooter($params) {
 
-		$this->context->controller->addJS($this->_path  . 'js/front/product-diet.js');
-		$this->context->controller->addCSS($this->_path . 'css/front/product-diet.css');
+		
+		
 		$this->context->controller->addJS($this->_path  . 'libs/thickbox/thickbox-compressed.js');
 		$this->context->controller->addCSS($this->_path . 'libs/thickbox/thickbox.css');
-		$this->context->controller->addJS($this->_path  . 'js/front/highcharts/highcharts.js');
-		$this->context->controller->addJS($this->_path  . 'js/front/highcharts/highcharts-more.js');		
+		
 
-		$product = $params['product'];
+		$product = array();
 
 		$this->context->smarty->assign(
 			array(
 				// 'gapi_mode' => $gapi_mode,
 				// 'dashactivity_config_form' => $this->renderConfigForm(),
-				'id_category' => $product->getDefaultCategory(),
+				//'id_category' => $product->getDefaultCategory(),
 				'date_format' => $this->context->language->date_format_lite,
 				'path'		  => $this->_path,
 				'link'        => $this->context->link
