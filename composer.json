@@ -1,0 +1,12 @@
+{
+    "name": "root/popup",
+    "require": {
+        "ckeditor/ckeditor": "^4.6"
+    },
+    "authors": [
+        {
+            "name": "Camille KANZA",
+            "email": "camillekanza6@hotmail.com"
+        }
+    ]
+}

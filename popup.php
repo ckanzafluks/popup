@@ -32,10 +32,10 @@ class Popup extends Commonpopup {
 
 	function hookDisplayFooter($params) {
 
-		
-		
+				
 		$this->context->controller->addJS($this->_path  . 'libs/thickbox/thickbox-compressed.js');
 		$this->context->controller->addCSS($this->_path . 'libs/thickbox/thickbox.css');
+		$this->context->controller->addJS($this->_path  . 'js/front/popup.js');
 		
 
 		$product = array();
@@ -54,7 +54,9 @@ class Popup extends Commonpopup {
 	}
 
 
-
+	/**
+	* Initialisation hookList
+	**/
 	private function _initHookList()
 	{
 		$hookList = Hook::getHooks();
