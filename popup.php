@@ -108,9 +108,10 @@ class Popup extends Commonpopup {
 		$this->_html = '';
 		$this->_initHeaderHTML();
 
-		// tableau des hooks
-		$this->_html .= $this->_initHookList();
-		
+
+		$this->_html .= $this->_initButtonAdd();
+
+
 				
 		if ( Tools::isSubmit('submit') ) {
 
@@ -157,10 +158,10 @@ class Popup extends Commonpopup {
 						$this->_html .= $this->_displaySuccess('Votre paramétrage a bien été ajouté');						
 					}										
 				}
-				$this->_html .= $this->_getBreadcrumbs('homepagecontent');
-				$this->_html .= $this->_displayFormCategoryAdd();
-				$this->_html .= $this->_displayHomepageContent();
-				$this->_html .= '<br />' . $this->_displaySubmitFormsRecord(Tools::getValue('id_category'));
+				//$this->_html .= $this->_getBreadcrumbs('homepagecontent');
+				//$this->_html .= $this->_displayFormCategoryAdd();
+				//$this->_html .= $this->_displayHomepageContent();
+				//$this->_html .= '<br />' . $this->_displaySubmitFormsRecord(Tools::getValue('id_category'));
 				
 			}
 			
@@ -213,6 +214,17 @@ class Popup extends Commonpopup {
 		if ( $action = Tools::getValue('action') ) {
 			
 			switch ( $action ) {
+
+				// Formulaire d'ajout d'une nouvelle PopUp
+				case "add":
+					
+					$this->_html .= $this->_getBreadcrumbs('homepagecontent');
+					$this->_html .= $this->_displayFormPopUpAdd();
+					
+					break;
+
+
+
 				case "editParameter":
 					//case "updatedietconfiguration":
 					$this->_html .= $this->_getBreadcrumbs('homepagecontent');

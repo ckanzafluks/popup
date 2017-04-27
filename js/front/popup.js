@@ -7,6 +7,8 @@ function closeThickbox() {
 
 $(document).ready(function(){
 	
-	$('#mypopup').modal('show');
+	setTimeout(function() {
+		$('#mypopup').modal('show');
+	},2000);	
 	
 });

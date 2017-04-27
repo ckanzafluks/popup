@@ -36,13 +36,16 @@ Abstract class Commonpopup extends Module {
 	
 		$sql = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_. 'popup` (
 				  `id_popup` int(11) NOT NULL AUTO_INCREMENT,
-				  `name` varchar(100) NOT NULL,
+				  `title` varchar(100) NOT NULL,
+				  `desc`  varchar(255) NULL,
 				  `content` text DEFAULT NULL,
-				  `is_active` int(1) DEFAULT 0,
+				  `is_active` tinyint(1) DEFAULT 0,
 				  `always_open` int(1) DEFAULT 1,
 				  `order` int(11) NOT NULL,
 				  `updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 				  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+				  `start` timestamp NULL,
+				  `end` timestamp NULL,
 				  PRIMARY KEY (`id_popup`)
 				) ENGINE=InnoDB;';
 		
@@ -103,58 +106,139 @@ Abstract class Commonpopup extends Module {
 	
 	##################################### CATEGORIES RENDER METHODS ##############################################
 
+
+	/**
+	* Initialisation hookList
+	**/
+	protected function _initPopUpList($id=null)
+	{
+		$sql = 'SELECT * FROM  `'._DB_PREFIX_.'popup` p ';
+		if ( $id ) {
+			$sql .= 'WHERE p.id_popup='. (int) $id;
+		}
+		$resultDB = Db::getInstance()->executeS($sql);
+
+		
+		$html     = '<table class="table">
+						<thead>
+							<tr>
+								<th> </th>
+								<th>id</th>
+								<th>Nom de la popup</th>
+								<th>Statut</th>
+								<th>Début</th>
+								<th>Fin</th>
+							</tr>
+						</thead>
+					 	<tbody>';
+					if ( !empty($resultDB) ) { 	
+						foreach ( $resultDB as $key => $row ) {
+							$html .= '<tr>';
+								$html .= '<td>';
+									$html .= $key++;
+								$html .= '</td>';
+								$html .= '<td>';
+									$html .= $row['id_popup'];
+								$html .= '</td>';
+								$html .= '<td>';
+									$html .= $this->l($row['desc']);
+								$html .= '</td>';
+								$html .= '<td>';
+									$html .= $this->l($row['is_active']);
+								$html .= '</td>';
+								$html .= '<td>';
+									$html .= $this->l($row['start']);
+								$html .= '</td>';
+								$html .= '<td>';
+									$html .= $this->l($row['end']);
+								$html .= '</td>';
+							$html .= '</tr>';
+						}
+					} else {
+						$html .= '<tr><td colspan="9999">'. $this->l('No results found').'</td></tr>';
+					}
+		$html     .= '</table>';
+		return $html;
+	}
+
+	/**
+	 * 
+	 */
+	protected function _displayFormPopUpAdd()
+	{
+
+		/*
+		EATE TABLE IF NOT EXISTS `'._DB_PREFIX_. 'popup` (
+				  `id_popup` int(11) NOT NULL AUTO_INCREMENT,
+				  `name` varchar(100) NOT NULL,
+				  `content` text DEFAULT NULL,
+				  `is_active` tinyint(1) DEFAULT 0,
+				  `always_open` int(1) DEFAULT 1,
+				  `order` int(11) NOT NULL,
+				  `updated` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+				  `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+				  `start` timestamp NULL,
+				  `end` timestamp NULL,
+				  PRIMARY KEY (`id_popup`)
+
+		*/
+		
+		return '
+		<form>
+			<div class="form-group">
+				<label for="name">Description</label>
+				<input type="text" size="50" name="name" class="form-control" id="name" aria-describedby="nameHelp" placeholder="Saisissez le nom de votre popup">
+				<small id="nameHelp" class="form-text text-muted">Descrition de référence(invisible sur le site)</small>
+			</div>
+			<div class="form-group">
+				<label for="title">Titre de votre Popup</label>
+				<input type="text" size="50" name="title" class="form-control" id="title" aria-describedby="titleHelp" placeholder="Saisissez le nom de votre popup">
+				<small id="titleHelp" class="form-text text-muted">Titre de votre PopUp tel qu\'il apparaîtra sur le site</small>
+			</div>
+			<div class="form-group">
+				<label for="contentP">Contenu de la PopUp</label>
+				<textarea class="form-control" id="contentP" name="content" rows="3" cols="50"></textarea>
+				<small id="titleHelp" class="form-text text-muted">Contenu de votre PopUp</small>
+			</div>
+			<div class="form-check">
+				<label class="form-check-label">
+				<input type="checkbox" class="form-check-input">
+				Actif / Inacif
+				</label>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+		';
+	}
+
+
+
+
+
+
+
+
 	/**
 	 * 
 	 */
 	protected function _displayHomepage() {
-		$listCategories 		= $this->_getAllCategoriesInDB();
-		$helper 				= new HelperList();	
-		$helper->title 			= $this->l('Cron tasks');
-		$helper->table 			= $this->name;
-		//$helper->table 		= 'merged';
-		$helper->identifier 	= 'id_category';
-		$helper->no_link 		= true;
-		$helper->simple_header 	= false;
-		$helper->show_toolbar 	= true;
-		$helper->shopLinkType 	= '';
-		$helper->actions 		= array('edit');
+		return $this->_initPopUpList();
+	}
+
+	protected function _initButtonAdd() {
+
+		$url = $this->context->link->getAdminLink('AdminModules', false) .'&action=add&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name.'&token='.Tools::getAdminTokenLite('AdminModules');
 		
-		//$helper->actions = array('edit');
-	
-		$values 			= $listCategories;
-		$helper->listTotal 	= count($values);
-		//$helper->tpl_vars 	= array('show_filters' => false);
-	
-		/*
-			$helper->toolbar_btn['new'] = array(
-					'href' => $this->context->link->getAdminLink('AdminModules', false)
-					.'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name
-					.'&newcronjobs=1&token='.Tools::getAdminTokenLite('AdminModules'),
-					'desc' => $this->l('Add new task')
-			);*/
-	
-		$helper->token = Tools::getAdminTokenLite('AdminModules');
-		$helper->currentIndex = $this->context->link->getAdminLink('AdminModules', false)
-		.'&action=configure&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
-	
-		$list = array(
-			'is_active' 	=> array(
-				'title' 	=> $this->l('Activer / Désactiver'),
-				'type' 		=> 'text',
-				//'type' => 'date',	
-			),
-			'id_category' 	=> array(
-				'title' 	=> $this->l('Identifiant de la catégorie'),
-				'type' 		=> 'text'
-			),
-			'name' => array(
-				'title' 	=> $this->l('Description'),
-				'type' 		=> 'text'
-			)
-		);
-		
-		
-		return $helper->generateList($values, $list);	
+		return '
+				<div class="form-group row-padding-top">
+					<a href="'. $url .'" title="Ajouter une Popup">
+						<button name="submitLogin" type="submit" tabindex="4" class="btn btn-primary btn-lg btn-block ladda-button" data-style="slide-up" data-spinner-color="white">
+							<span class="ladda-label">
+								Ajouter une Popup
+							</span>
+						</button>
+					</a>
+				</div>';
 	}
 	
 	/**
